@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Voice Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <img src="/static/logo.png" alt="logo">
+        <form method="POST" action="/" class="mt-4">
+            <div class="mb-3">
+                <label for="text" class="form-label">Enter Text</label>
+                <textarea id="text" name="text" class="form-control" rows="3" required></textarea>
+            </div>
+            <div>
+                <select id="options" name="selected_speaker" class="form-select" required>
+                    <option value="" disabled selected>Select a Voice </option>
+                </select>
+                <div id="audio-container" class="mt-4"></div>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Generate Deep Voice</button>
+        </form>
+
+        {% if download_link %}
+        <div class="mt-4">
+            <h4>Your Generated Deep Voice:</h4>
+            <audio controls>
+                <source src="/static/audio/{{ download_link }}" type="audio/wav">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+        <div class="mt-3">
+            <a href="/download/{{ download_link.split('/')[-1] }}" class="btn btn-success">Download Audio</a>
+        </div>
+        {% endif %}
+    </div>
+
+    <script>
+        const options = ['Claribel Dervla', 'Daisy Studious', 'Gracie Wise', 'Tammie Ema', 'Alison Dietlinde', 'Ana Florence', 'Annmarie Nele', 'Asya Anara', 'Brenda Stern', 'Gitta Nikolina', 'Henriette Usha', 'Sofia Hellen', 'Tammy Grit', 'Tanja Adelina', 'Vjollca Johnnie', 'Andrew Chipper', 'Badr Odhiambo', 'Dionisio Schuyler', 'Royston Min', 'Viktor Eka', 'Abrahan Mack', 'Adde Michal', 'Baldur Sanjin', 'Craig Gutsy', 'Damien Black', 'Gilberto Mathias', 'Ilkin Urbano', 'Kazuhiko Atallah', 'Ludvig Milivoj', 'Suad Qasim', 'Torcull Diarmuid', 'Viktor Menelaos', 'Zacharie Aimilios', 'Nova Hogarth', 'Maja Ruoho', 'Uta Obando', 'Lidiya Szekeres', 'Chandra MacFarland', 'Szofi Granger', 'Camilla Holmström', 'Lilya Stainthorpe', 'Zofija Kendrick', 'Narelle Moon', 'Barbora MacLean', 'Alexandra Hisakawa', 'Alma María', 'Rosemary Okafor', 'Ige Behringer', 'Filip Traverse', 'Damjan Chapman', 'Wulf Carlevaro', 'Aaron Dreschner', 'Kumar Dahl', 'Eugenio Mataracı', 'Ferran Simen', 'Xavier Hayasaka', 'Luis Moray', 'Marcos Rudaski'];
+
+        const select = document.getElementById('options');
+
+        // Populate the dropdown options dynamically
+        options.forEach(option => {
+            const opt = document.createElement('option');
+            opt.value = option;
+            opt.textContent = option;
+            select.appendChild(opt);
+        });
+
+        // Event listener to handle selection change and display corresponding audio
+        select.addEventListener('change', function () {
+            const audioContainer = document.getElementById('audio-container');
+            audioContainer.innerHTML = ''; // Clear any existing audio
+
+            const selectedOption = select.value;
+            const audioElement = document.createElement('audio');
+            audioElement.controls = true;
+
+            // Create a source element for the audio file
+            const sourceElement = document.createElement('source');
+            sourceElement.src = `/static/audio/${selectedOption}.wav`; // Replace spaces with underscores in file name
+            sourceElement.type = 'audio/wav';
+
+            audioElement.appendChild(sourceElement);
+            audioContainer.appendChild(audioElement); // Append the audio element to the container
+        });
+    </script>
+</body>
+</html>
