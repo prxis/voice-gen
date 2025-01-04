@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, render_template, send_file
+from flask import Flask, request, render_template, send_file, send_from_directory, jsonify
 from TTS.api import TTS  # Only import TTS
 from pydub import AudioSegment
 import torch
@@ -13,6 +13,8 @@ torch.set_default_device(device)
 app = Flask(__name__)
 UPLOAD_FOLDER = "static/audio"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+AUDIO_DIRECTORY = os.path.join(app.root_path, 'static', 'preview')
 
 # Specify the model path manually
 model_path = "tts_models/multilingual/multi-dataset/xtts_v2"  # Replace with your desired model ID
@@ -52,6 +54,29 @@ def index():
 def download(filename):
     file_path = os.path.join(UPLOAD_FOLDER, filename)
     return send_file(file_path, as_attachment=True)
+
+
+@app.route('/audio')
+def home():
+    # Render the main preview page
+    return render_template('preview.html')
+
+@app.route('/audio-files')
+def list_audio_files():
+    """
+    Endpoint to list all .wav files in the AUDIO_DIRECTORY.
+    """
+    if not os.path.exists(AUDIO_DIRECTORY):
+        return jsonify({"error": "Audio directory not found"}), 404
+
+    # Get all .wav files in the directory
+    files = [f for f in os.listdir(AUDIO_DIRECTORY) if f.endswith('.wav')]
+    return jsonify({"files": files})
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
 
 if __name__ == "__main__":
     app.run(debug=True, host="localhost", port=8080)

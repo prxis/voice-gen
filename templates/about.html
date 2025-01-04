@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f7f7f7;
+            font-family: 'Poppins', sans-serif;
+        }
+        h1 {
+            color: #4CAF50;
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.2em;
+            color: #666;
+        }
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+        .card-img-top {
+            border-radius: 15px;
+            transition: transform 0.3s ease-in-out;
+        }
+        .card-body {
+            background-color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        .card-body h5 {
+            color: #333;
+            font-size: 1.6em;
+            margin: 15px 0;
+        }
+        .card-body p {
+            color: #777;
+            font-size: 1.1em;
+        }
+        .btn-social {
+        margin: 0 5px;
+        font-size: 1.2rem;
+        text-decoration: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        display: inline-block;
+    }
+
+    /* LinkedIn specific color */
+    .linkedin {
+        color: #0a66c2;
+    }
+    .linkedin:hover {
+        color: #004182;
+    }
+
+    /* Instagram gradient color */
+    .instagram {
+        color: #e1306c;
+        background: -webkit-linear-gradient(#f58529, #dd2a7b, #8134af, #515bd4);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .instagram:hover {
+        color: #c13584; /* Subtle hover color */
+        background: none;
+        -webkit-text-fill-color: #c13584;
+    }
+    footer {
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Meet The Creators</h1>
+        <!-- <p class="text-center">Passionate about technology, innovation, and AI!</p> -->
+
+        <div class="row">
+            <!-- Creator 1 -->
+            <div class="col-md-6">
+                <div class="card">
+                    <img src="/static/images/creator1.jpg" class="card-img-top" alt="Creator 1" style="height: 300px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Nilesh Pandey</h5>
+                        <!-- <p class="card-text">John is one of the co-creators of this project. He loves to explore new technologies and create innovative solutions.</p> -->
+                        <a href="https://www.linkedin.com/in/nilesh-pandey-ai-sec/" class="btn btn-social linkedin" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.instagram.com/nileshpandey.03/" class="btn btn-social instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <p>Email: <a href="mailto:johndoe@example.com" style="color: #0077b5;">pandeynilesh325a@gmail.com</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Creator 2 -->
+            <div class="col-md-6">
+                <div class="card">
+                    <img src="/static/images/creator2.jpg" class="card-img-top" alt="Creator 2" style="height: 300px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Aditya Patil</h5>
+                        <!-- <p class="card-text">Jane is the other co-creator, always eager to discover new ideas and turn them into reality with AI and software development.</p> -->
+                        <a href="https://www.linkedin.com/in/adityapatil37/" class="btn btn-social linkedin" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.instagram.com/im_aditya_patil/" class="btn btn-social instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <p>Email: <a href="mailto:janesmith@example.com" style="color: #0077b5;">adityapa37@gmail.com</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <p class="text-center">If you have any questions or suggestions, feel free to reach out to us!</p>
+    </div>
+    <footer class="bg-dark text-white text-center py-3">
+        <div class="container">
+            <div class="mb-2">
+                <a href="/" class="text-white me-3 text-decoration-none">Home</a>
+                <a href="/audio" class="text-white me-3 text-decoration-none">Audio</a>
+                <a href="/about" class="text-white text-decoration-none">About</a>
+            </div>
+            <p class="mb-0">&copy; 2025 Prxis. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

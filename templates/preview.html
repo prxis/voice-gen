@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio File Preview</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Audio Files</h1>
+        <p class="text-muted text-center">Click play to listen to an audio file.</p>
+
+        <div class="list-group" style="margin-bottom: 10px;" id="audio-list">
+            <!-- Audio list will be populated dynamically -->
+        </div>
+        <a href="/" class="btn btn-success" style="margin-bottom: 20px;">Back</a>
+    </div>
+
+
+    <script>
+        async function fetchAudioFiles() {
+            try {
+                // Fetch the list of audio files from the Flask endpoint
+                const response = await fetch('/audio-files');
+                const data = await response.json();
+
+                if (data.error) {
+                    console.error(data.error);
+                    return;
+                }
+
+                // Populate the list with playable audio elements
+                const audioList = document.getElementById('audio-list');
+                data.files.forEach(file => {
+                    const listItem = document.createElement('div');
+                    listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
+
+                    const fileName = decodeURIComponent(file.replace('.wav', '').replace(/_/g, ' '));
+
+                    // Create an audio player
+                    const audioPlayer = document.createElement('audio');
+                    audioPlayer.controls = true;
+                    audioPlayer.src = `/static/preview/${file}`;
+                    audioPlayer.style.maxWidth = '300px';
+
+                    // Display the file name and audio player
+                    listItem.innerHTML = `<strong>${fileName}</strong>`;
+                    listItem.appendChild(audioPlayer);
+
+                    audioList.appendChild(listItem);
+                });
+            } catch (error) {
+                console.error('Error fetching audio files:', error);
+            }
+        }
+
+        // Fetch and display audio files on page load
+        window.onload = fetchAudioFiles;
+    </script>
+</body>
+</html>
